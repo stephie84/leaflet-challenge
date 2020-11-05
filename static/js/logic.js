@@ -14,10 +14,9 @@ function createFeatures(earthquakeData) {
 
   
   // Create a GeoJSON layer containing the features array on the earthquakeData object
-  // Run the onEachFeature function once for each piece of data in the array
+ 
   var earthquakes = L.geoJSON(earthquakeData, {
-    //onEachFeature: onEachFeature
-
+    
     pointToLayer: function(feature, latlng) {
       return L.circleMarker(latlng,{
       color: 'white',
@@ -27,10 +26,7 @@ function createFeatures(earthquakeData) {
       }).bindPopup("<h3 class='text-center'>" + feature.properties.place +
           "</h3><hr><h4 class='text-center'>Magnitude " + feature.properties.mag + "</h4>");
     },
-   // onEachFeature: function(feature, layer) {
-    //  layer.bindPopup("<h3>" + feature.properties.place +
-  //     "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
-   // }
+   
   });
 
   function getColor(depth) {
@@ -43,7 +39,7 @@ function createFeatures(earthquakeData) {
         return 'red';
     };
   };
-  // Sending our earthquakes layer to the createMap function
+  
   createMap(earthquakes);
 }
 
@@ -66,13 +62,13 @@ function createMap(earthquakes) {
     accessToken: API_KEY
   });
 
-  // Define a baseMaps object to hold our base layers
+  // Define a baseMaps object to hold base layers
   var baseMaps = {
     "Street Map": streetmap,
     "Dark Map": darkmap
   };
 
-  // Create overlay object to hold our overlay layer
+  // Create overlay object to hold overlay layer
   var overlayMaps = {
     Earthquakes: earthquakes
   };
@@ -88,7 +84,7 @@ function createMap(earthquakes) {
 
   // Create a layer control
   // Pass in our baseMaps and overlayMaps
-  // Add the layer control to the mapn
+  // Add the layer control to the map
   L.control.layers(baseMaps, overlayMaps, {
     collapsed: false
   }).addTo(myMap);
